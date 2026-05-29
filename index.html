@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shihan Pradeep Babu M</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Custom Design Tokens matching your precise theme layout */
+        :root {
+            --bg-color: #FAF6F0; /* Warm cream background */
+            --primary-color: #D35400; /* Rich Burnt Orange */
+            --primary-hover: #B34400;
+            --text-main: #1A1A1A;
+            --text-muted: #555555;
+            --text-nav: #2C3E50;
+            --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.03);
+            --success-color: #27AE60;
+            
+            /* Professional Badge Theme Colors */
+            --bg-karate: #E74C3C;
+            --bg-math: #3498DB;
+            --bg-tkd: #9B59B6;
+            --bg-scout: #2ECC71;
+            --bg-others: #F1C40F;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 74px; /* Clearance spacer for the sticky bottom bar */
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Fixed Profile Header Container */
+        .app-top-header {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 14px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.01);
+            width: 100%;
+        }
+
+        .header-profile-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .header-profile-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            min-width: 0; 
+        }
+
+        .header-user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), #E67E22);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 800;
+            box-shadow: 0 4px 10px rgba(211, 84, 0, 0.12);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .header-profile-meta h4 {
+            font-size: 14.5px;
+            font-weight: 800;
+            color: var(--text-nav);
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .header-profile-meta p {
+            font-size: 11.5px;
+            color: var(--success-color);
+            font-weight: 700;
+            margin-top: 1px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .header-logout-btn {
+            background-color: #C0392B;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* Bottom Menu Layout */
+        .app-bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            background-color: #FFFFFF;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.03);
+            padding: 0 8px;
+        }
+
+        .bottom-nav-tab {
+            background: none;
+            border: none;
+            font-family: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #888888;
+            font-weight: 700;
+            font-size: 11px;
+            cursor: pointer;
+            flex: 1;
+            gap: 4px;
+            height: 100%;
+        }
+        .bottom-nav-tab.active { color: var(--primary-color); }
+
+        .view-hidden { display: none !important; }
+        .view-active { display: block; }
+
+        .content-shell {
+            padding: 24px 20px;
+            max-width: 760px; 
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        .hero-section { display: flex; flex-direction: column; gap: 24px; width: 100%; }
+        .subtitle { color: var(--primary-color); font-weight: 700; letter-spacing: 1px; font-size: 13px; display: block; text-transform: uppercase; }
+        .hero-title { font-size: 34px; font-weight: 800; line-height: 1.15; margin: 8px 0 14px; color: #1A1A1A; }
+        .hero-desc { font-size: 15px; color: var(--text-muted); line-height: 1.55; margin-bottom: 20px; font-weight: 500; }
+        .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; width: 100%; }
+
+        /* General Buttons layout */
+        .btn {
+            font-family: inherit;
+            padding: 12px 20px;
+            font-weight: 700;
+            font-size: 13.5px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-primary { background-color: var(--primary-color); color: white; box-shadow: 0 4px 12px rgba(211, 84, 0, 0.12); }
+        .btn-secondary { background-color: transparent; border: 1px solid #D1CFC9; color: rgba(0,0,0,0.8); }
+
+        /* Professional Resume Cards & Bullet Icons */
+        .resume-card, .about-card-left { background: white; border-radius: 14px; padding: 20px; box-shadow: var(--card-shadow); border: 1px solid rgba(0,0,0,0.02); margin-top: 8px; }
+        .interactive-resume-section { padding: 14px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #F3EFE9; cursor: pointer; transition: all 0.2s ease; }
+        .interactive-resume-section:hover { border-color: var(--primary-color); background-color: #FFFDFB; }
+        .interactive-resume-section:last-child { margin-bottom: 0; }
+        
+        .section-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .section-title-row h3 { font-size: 13.5px; font-weight: 700; color: var(--text-nav); letter-spacing: 0.5px; margin: 0; display: flex; align-items: center; gap: 8px; }
+
+        /* Colored Badge Wrappers for Icons */
+        .icon-wrap-avatar { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; }
+        .icon-wrap-avatar.bg-karate { background-color: var(--bg-karate); }
+        .icon-wrap-avatar.bg-math { background-color: var(--bg-math); }
+        .icon-wrap-avatar.bg-tkd { background-color: var(--bg-tkd); }
+        .icon-wrap-avatar.bg-scout { background-color: var(--bg-scout); }
+        .icon-wrap-avatar.bg-others { background-color: var(--bg-others); color: #1A1A1A; }
+
+        .view-more-badge { font-size: 11px; font-weight: 700; color: var(--primary-color); display: flex; align-items: center; gap: 2px; opacity: 0.8; }
+
+        /* PROFESSIONAL INLINE BULLET LISTS */
+        .professional-bullet-list { list-style: none; padding: 0; }
+        .professional-bullet-list li { 
+            font-size: 13px; 
+            line-height: 1.5; 
+            color: #2C3E50; 
+            margin-bottom: 10px; 
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-weight: 500; 
+        }
+        .professional-bullet-list li:last-child { margin-bottom: 0; }
+        .professional-bullet-list li i { 
+            color: var(--primary-color); 
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* About Section Biography styling layout */
+        .about-section-top-row { margin: 32px 0 12px; display: flex; flex-direction: column; gap: 20px; width: 100%; }
+        .about-content-right { background: #FFFDF9; border: 1px dashed rgba(211, 84, 0, 0.15); border-radius: 14px; padding: 24px; }
+        .about-content-right h2 { font-size: 26px; margin-bottom: 12px; font-weight: 800; color: var(--text-nav); }
+        .about-content-right p { font-size: 14.5px; color: #2C3E50; line-height: 1.55; margin-bottom: 12px; font-weight: 500; }
+
+        /* Metrics Data Highlights Grid */
+        .metrics-section { margin-top: 36px; width: 100%; }
+        .section-heading { font-size: 24px; font-weight: 800; color: var(--text-nav); }
+        .section-subheading { font-size: 14px; color: var(--text-muted); margin: 6px 0 24px; font-weight: 500; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; width: 100%; }
+        .metric-box { background: white; border-radius: 12px; border: 1px solid #EAE8E2; padding: 24px; box-shadow: var(--card-shadow); display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
+        .metric-box h4 { font-size: 16px; font-weight: 700; color: var(--text-nav); }
+        .metric-box .metric-highlight { font-size: 13px; font-weight: 600; color: var(--primary-color); }
+        .metric-box p { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
+        .metric-box .click-indicator { font-size: 11.5px; font-weight: 700; color: var(--primary-color); margin-top: auto; padding-top: 10px; display: flex; align-items: center; gap: 4px; }
+
+        /* Announcement and Timeline Cards styling */
+        .update-card { background: white; border-radius: 12px; border: 1px solid #EAE8E2; padding: 20px; margin-bottom: 16px; box-shadow: var(--card-shadow); }
+        .update-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+        .post-info h4 { font-size: 14.5px; font-weight: 700; color: var(--text-nav); }
+        .post-info span { font-size: 11.5px; color: var(--text-muted); display: block; margin-top: 2px; }
+        .post-badge { background-color: #EAEAEA; font-size: 10.5px; padding: 3px 8px; border-radius: 4px; font-weight: 700; color: #555; }
+        .post-badge.shihan { background-color: #FDF2E9; color: var(--primary-color); }
+        .update-title-text { font-size: 16.5px; font-weight: 700; margin: 10px 0 4px; color: var(--text-nav); }
+        .update-body { font-size: 14px; line-height: 1.5; color: #2C3E50; }
+
+        /* Profiles and Account Panel sheets layout rules */
+        .profile-container { background: white; border-radius: 14px; padding: 24px; box-shadow: var(--card-shadow); border: 1px solid #EAE8E2; width: 100%; }
+        .profile-header-card { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid #EEE; padding-bottom: 20px; margin-bottom: 20px; }
+        .profile-title-block h2 { font-size: 19px; font-weight: 800; color: var(--text-nav); }
+        .profile-title-block p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+        .profile-details-grid { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+        .namo-panel-card { background: white; border-radius: 10px; border: 1px solid #EAE8E2; padding: 16px; width: 100%; }
+        .namo-panel-card h3 { font-size: 14.5px; font-weight: 700; color: var(--text-nav); display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #EEE; padding-bottom: 8px; margin-bottom: 12px; }
+
+        /* Extended Details View Layout Alignment */
+        .detail-view-container { background: white; border-radius: 14px; padding: 24px; box-shadow: var(--card-shadow); border: 1px solid #EAE8E2; width: 100%; }
+        .detail-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid #E5E5E5; padding-bottom: 16px; }
+        .detail-header h2 { font-size: 22px; color: var(--text-nav); font-weight: 800; line-height: 1.2; }
+        .detail-highlight { font-size: 14.5px; font-weight: 600; color: var(--primary-color); margin-bottom: 14px; line-height: 1.4; }
+        .detail-body-list { list-style: none; padding: 0; }
+        .detail-body-list li { font-size: 14px; line-height: 1.6; margin-bottom: 12px; color: #2C3E50; display: flex; align-items: flex-start; gap: 10px; }
+        .detail-body-list li i { color: var(--primary-color); margin-top: 4px; flex-shrink: 0; }
+
+        /* Floating action buttons */
+        #communityPostFAB { position: fixed; bottom: 80px; right: 20px; background-color: var(--primary-color); color: white; border: none; padding: 12px 20px; border-radius: 50px; font-weight: 700; font-size: 13.5px; cursor: pointer; box-shadow: 0 6px 16px rgba(211, 84, 0, 0.2); display: flex; align-items: center; gap: 6px; z-index: 900; font-family: inherit; }
+        .fab-hidden { display: none !important; }
+
+        /* Secure Login Gateway Card alignments */
+        .auth-guard-gate-overlay { background-color: var(--bg-color); position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; display: flex; align-items: center; justify-content: center; overflow-y: auto; padding: 20px; }
+        .auth-container { width: 100%; max-width: 420px; text-align: center; margin: auto; }
+        .auth-card { background: #FFFFFF; border-radius: 16px; border: 1px solid #EAE8E2; padding: 32px 24px; text-align: left; box-shadow: var(--card-shadow); width: 100%; }
+        .auth-tabs { display: flex; border-bottom: 1px solid #EAE8E2; margin-bottom: 24px; gap: 8px; }
+        .auth-tab { flex: 1; text-align: center; padding: 12px 6px; background: none; border: none; font-size: 14.5px; font-weight: 700; color: var(--text-muted); cursor: pointer; font-family: inherit; }
+        .auth-tab.active { color: var(--primary-color); border-bottom: 3px solid var(--primary-color); }
+        
+        .form-group { margin-bottom: 18px; width: 100%; }
+        .form-group label { display: block; font-weight: 700; font-size: 12.5px; margin-bottom: 8px; color: var(--text-nav); text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group input { font-family: inherit; width: 100%; padding: 13px 16px; border: 1px solid #D1CFC9; border-radius: 8px; font-size: 14px; color: var(--text-main); background-color: #FAFAFA; }
+        .form-group input:focus { outline: none; border-color: var(--primary-color); background-color: #FFFFFF; box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.08); }
+
+        /* Modals layout styles */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; z-index: 2000; visibility: hidden; opacity: 0; padding: 16px; }
+        .modal-overlay.active { visibility: visible; opacity: 1; }
+        .modal-card { background-color: var(--bg-color); width: 100%; max-width: 460px; border-radius: 12px; padding: 24px; box-shadow: 0 16px 36px rgba(0,0,0,0.12); margin: auto; }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px; }
+
+        @media (min-width: 601px) {
+            .hero-section { flex-direction: row; gap: 32px; }
+            .hero-left, .hero-right { flex: 1; }
+            .about-section-top-row { flex-direction: row; gap: 24px; }
+            .about-card-left, .about-content-right { flex: 1; }
+            .profile-details-grid { flex-direction: row; }
+            .namo-panel-card { flex: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root-auth-guard" class="auth-guard-gate-overlay">
+        <div class="auth-container" id="auth-form-view-node">
+            <h2 style="font-size: 28px; font-weight: 800; color: var(--text-nav); margin-bottom: 4px; letter-spacing: -0.5px;">Dojo Network</h2>
+            <p class="auth-subtitle" style="font-size: 14px; color: var(--text-muted); margin: 0 0 28px; font-weight: 500; padding: 0 12px; line-height: 1.4;">Sign in or create an account to access the official platform.</p>
+
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button id="tab-login" class="auth-tab active" onclick="setAuthMode('login')">Sign In</button>
+                    <button id="tab-register" class="auth-tab" onclick="setAuthMode('register')">Create Account</button>
+                </div>
+
+                <div class="form-group id-field-block view-hidden" id="nameGroup">
+                    <label>Full Name / Title</label>
+                    <input type="text" id="authNameInput" placeholder="e.g., Sensei Rajesh Kumar">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="emailInput" placeholder="name@example.com">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 24px;">
+                    <label>Password</label>
+                    <input type="password" id="passwordInput" placeholder="••••••••">
+                </div>
+                
+                <button class="btn btn-primary login-submit" id="authSubmitBtn" style="width: 100%; height: 48px; font-size: 14px; border-radius: 8px;" onclick="processAuthAction()">Sign in</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-application-shell" class="view-hidden">
+        
+        <header class="app-top-header">
+            <div class="header-profile-wrapper">
+                <div class="header-profile-left" onclick="switchView('profile')">
+                    <div class="header-user-avatar" id="topHeaderAvatarNode">U</div>
+                    <div class="header-profile-meta">
+                        <h4 id="topHeaderNameNode">Practice User</h4>
+                        <p><i data-lucide="check-circle" style="width:12px; height:12px; color:var(--success-color);"></i> Active Member Account</p>
+                    </div>
+                </div>
+                <button class="header-logout-btn" onclick="handleLogoutAction()">Log Out</button>
+            </div>
+        </header>
+
+        <main class="content-shell">
+            
+            <section id="home-view" class="view-hidden">
+                <div class="hero-section">
+                    <div class="hero-left">
+                        <span class="subtitle">OFFICIAL WEBSITE</span>
+                        <h2 class="hero-title">Shihan Pradeep<br>Babu M</h2>
+                        <p class="hero-desc">6th Dan Black Belt · Chief Instructor of Zen Isshinryu Karate · World Record Holder · Rashtrapati Scout Awardee. Shaping young India through discipline, leadership and gratitude.</p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary" onclick="switchView('feed')">Go to Public Feed</button>
+                            <a href="https://www.instagram.com/m.pradeepbabu" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                                <i data-lucide="instagram" style="width:16px; height:16px;"></i> Follow on Instagram
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-right">
+                        <div class="resume-card">
+                            <div class="interactive-resume-section" onclick="navigateToDetail('karate')">
+                                <div class="section-title-row">
+                                    <h3>
+                                        <div class="icon-wrap-avatar bg-karate"><i data-lucide="shield"></i></div> 
+                                        KARATE
+                                    </h3>
+                                    <span class="view-more-badge">View <i data-lucide="chevron-right" style="width:11px;height:11px;"></i></span>
+                                </div>
+                                <ul class="professional-bullet-list">
+                                    <li><i data-lucide="award" style="width:14px; height:14px;"></i> 6th Dan Black Belt, Chief Instructor & Examiner of Zen Isshinryu Karate.</li>
+                                    <li><i data-lucide="user-check" style="width:14px; height:14px;"></i> Titled - SHIHAN (Master of the Masters).</li>
+                                    <li><i data-lucide="medal" style="width:14px; height:14px;"></i> Silver Medalist at the Isshinryu World Championship, USA 2024.</li>
+                                </ul>
+                            </div>
+
+                            <div class="interactive-resume-section" onclick="navigateToDetail('academics')">
+                                <div class="section-title-row">
+                                    <h3>
+                                        <div class="icon-wrap-avatar bg-math"><i data-lucide="book-open"></i></div>
+                                        ACADEMICS
+                                    </h3>
+                                    <span class="view-more-badge">View <i data-lucide="chevron-right" style="width:11px;height:11px;"></i></span>
+                                </div>
+                                <ul class="professional-bullet-list">
+                                    <li><i data-lucide="graduation-cap" style="width:14px; height:14px;"></i> B.Sc (Mathematics) Graduate from Loyola College, Chennai.</li>
+                                    <li><i data-lucide="file-text" style="width:14px; height:14px;"></i> Pursuing M.A. Public Administration from University of Madras.</li>
+                                </ul>
+                            </div>
+
+                            <div class="interactive-resume-section" onclick="navigateToDetail('taekwondo')">
+                                <div class="section-title-row">
+                                    <h3>
+                                        <div class="icon-wrap-avatar bg-tkd"><i data-lucide="zap"></i></div>
+                                        TAEKWONDO
+                                    </h3>
+                                    <span class="view-more-badge">View <i data-lucide="chevron-right" style="width:11px;height:11px;"></i></span>
+                                </div>
+                                <ul class="professional-bullet-list">
+                                    <li><i data-lucide="star" style="width:14px; height:14px;"></i> Prestigious 2nd Degree Black Belt certified directly by Kukkiwon, South Korea.</li>
+                                    <li><i data-lucide="activity" style="width:14px; height:14px;"></i> Expertise in Olympic-style sparring models and dynamic kicking formulas.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-section-top-row">
+                    <div class="about-card-left" style="padding: 12px; background: white;">
+                        <div class="interactive-resume-section" onclick="navigateToDetail('scoutHistory')">
+                            <div class="section-title-row">
+                                <h3>
+                                    <div class="icon-wrap-avatar bg-scout"><i data-lucide="compass"></i></div>
+                                    SCOUT HISTORY
+                                </h3>
+                                <span class="view-more-badge">View <i data-lucide="chevron-right" style="width:11px;height:11px;"></i></span>
+                            </div>
+                            <ul class="professional-bullet-list">
+                                <li><i data-lucide="ribbon" style="width:14px; height:14px;"></i> Rajyapuraskar (Governor) Awardee presented by Dr. K. Rosaiah, 2013.</li>
+                                <li><i data-lucide="flag" style="width:14px; height:14px;"></i> Participant of the 65th Republic Day Ceremonial Parade holding the Flag.</li>
+                            </ul>
+                        </div>
+
+                        <div class="interactive-resume-section" onclick="navigateToDetail('others')">
+                            <div class="section-title-row">
+                                <h3>
+                                    <div class="icon-wrap-avatar bg-others"><i data-lucide="award"></i></div>
+                                    OTHERS
+                                </h3>
+                                <span class="view-more-badge">View <i data-lucide="chevron-right" style="width:11px;height:11px;"></i></span>
+                            </div>
+                            <ul class="professional-bullet-list">
+                                <li><i data-lucide="trending-up" style="width:14px; height:14px;"></i> Won Track and Field Individual Championships consecutively for 3 Years.</li>
+                                <li><i data-lucide="heart" style="width:14px; height:14px;"></i> Founding member of social group "Ezhuvaai Ondraga" for community service.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="about-content-right">
+                        <h2>About Shihan</h2>
+                        <p>Titled Shihan — "Master of the Masters" — Pradeep Babu has been teaching karate since 2011 and has trained students between the ages of 2.5 and 86 years. He holds a B.Sc. (Mathematics) from Loyola College, Chennai and is pursuing M.A. Public Administration from the University of Madras.</p>
+                        <p>Beyond the dojo, he is a Rashtrapati (President) Scout Awardee, a 2nd Degree Black Belt in Taekwondo (Kukkiwon), and a founding member of Ezhuvaai Ondraga — a social group serving underprivileged children and elders.</p>
+                    </div>
+                </div>
+
+                <div class="metrics-section">
+                    <h2 class="section-heading">A life of discipline & service</h2>
+                    <p class="section-subheading">Highlights from decades of training, mentoring and championing Indian martial arts on the world stage. (Tap any card to view details)</p>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-box" onclick="navigateToDetail('medal')">
+                            <div class="icon-wrap-avatar bg-karate"><i data-lucide="trophy" style="width:18px; height:18px;"></i></div>
+                            <h4>Silver Medal</h4>
+                            <div class="metric-highlight">Isshinryu World Karate Championship, Pittsburgh USA, 2024</div>
+                            <p>Represented the national contingent at the global level, testing elite skills against top-tier international martial artists.</p>
+                            <span class="click-indicator">Read Details <i data-lucide="arrow-right" style="width:13px; height:13px;"></i></span>
+                        </div>
+                        <div class="metric-box" onclick="navigateToDetail('record')">
+                            <div class="icon-wrap-avatar bg-others"><i data-lucide="medal" style="width:18px; height:18px;"></i></div>
+                            <h4>World Record Holder</h4>
+                            <div class="metric-highlight">1,222 Bikes Over Chest in 37 Mins 16 Secs (April 2021)</div>
+                            <p>An extraordinary demonstration of physiological endurance, breath control, and core conditioning.</p>
+                            <span class="click-indicator">Read Details <i data-lucide="arrow-right" style="width:13px; height:13px;"></i></span>
+                        </div>
+                        <div class="metric-box" onclick="navigateToDetail('dan')">
+                            <div class="icon-wrap-avatar bg-tkd"><i data-lucide="shield-check" style="width:18px; height:18px;"></i></div>
+                            <h4>6th Dan Black Belt</h4>
+                            <div class="metric-highlight">Chief Instructor & Chief Examiner of Zen Isshinryu Karate</div>
+                            <p>Reached advanced master status, serving as the elite technical authority for the organization.</p>
+                            <span class="click-indicator">Read Details <i data-lucide="arrow-right" style="width:13px; height:13px;"></i></span>
+                        </div>
+                        <div class="metric-box" onclick="navigateToDetail('students')">
+                            <div class="icon-wrap-avatar bg-math"><i data-lucide="users" style="width:18px; height:18px;"></i></div>
+                            <h4>1,700+ Students Trained</h4>
+                            <div class="metric-highlight">Including 150 Black Belts & 15 Senior Instructors</div>
+                            <p>Fostering the next generation of leaders across India since 2011. Spanning ages from 2.5 to 86 years.</p>
+                            <span class="click-indicator">Read Details <i data-lucide="arrow-right" style="width:13px; height:13px;"></i></span>
+                        </div>
+                        <div class="metric-box" onclick="navigateToDetail('scout')">
+                            <div class="icon-wrap-avatar bg-scout"><i data-lucide="graduation-cap" style="width:18px; height:18px;"></i></div>
+                            <h4>Rashtrapati Scout Awardee</h4>
+                            <div class="metric-highlight">Highest Scout Honor, Presented by the President of India (2015)</div>
+                            <p>Honored at the Rashtrapati Bhavan for excellence in community service, leadership training, and civic responsibility.</p>
+                            <span class="click-indicator">Read Details <i data-lucide="arrow-right" style="width:13px; height:13px;"></i></span>
+                        </div>
+                        <div class="metric-box" onclick="navigateToDetail('defence')">
+                            <div class="icon-wrap-avatar bg-karate"><i data-lucide="heart" style="width:18px; height:18px;"></i></div>
+                            <h4>Self-Defence Programs</h4>
+                            <div class="metric-highlight">SRM, Saveetha Law, Infosys – Mahindra World City & More</div>
+                            <p>Designing and conducting tactical self-defense frameworks optimized for confidence and safety.</p>
+                            <span class="click-indicator">Read Details <i data-lucide="arrow-right" style="width:13px; height:13px;"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="detail-view" class="view-hidden">
+                <div class="detail-view-container">
+                    <button class="btn btn-secondary" onclick="returnFromDetailView()" style="margin-bottom: 20px; padding: 8px 14px; font-size:13px;">
+                        <i data-lucide="arrow-left" style="width:15px; height:15px;"></i> Back
+                    </button>
+                    <div id="detail-view-content"></div>
+                </div>
+            </section>
+
+            <section id="dojo-view" class="view-hidden">
+                <div class="updates-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <h2 class="section-heading">Dojo Announcements</h2>
+                        <button id="shihanPostBtn" class="btn btn-primary view-hidden">+ Broadcast Notice</button>
+                    </div>
+                    <p class="section-subheading">Official news, notices, grading updates, and announcements published exclusively by Shihan's desk.</p>
+                    <div id="dojo-feed-list"></div>
+                </div>
+            </section>
+
+            <section id="feed-view" class="view-hidden">
+                <div class="updates-container">
+                    <h2 class="section-heading">Public Feed Section</h2>
+                    <p class="section-subheading" id="feedSubtitle">Dojo social network timeline feed setup viewports.</p>
+                    <div id="public-feed-list"></div>
+                </div>
+            </section>
+
+            <section id="profile-view" class="view-hidden">
+                <div class="profile-container">
+                    <div class="profile-header-card">
+                        <div class="profile-master-avatar" id="pCardInitials">U</div>
+                        <div class="profile-title-block">
+                            <h2 id="pCardName">User Account</h2>
+                            <p id="pCardRole">Verified System Member</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-details-grid">
+                        <div class="namo-panel-card">
+                            <h3><i data-lucide="mail" style="width:16px; height:16px; color:var(--primary-color);"></i> Account Information</h3>
+                            <p style="font-size:13px; font-weight:600; color:#555;">Email address: <span id="pCardEmail" style="color:#1A1A1A; font-weight:700;"></span></p>
+                            <p style="font-size:13px; font-weight:600; color:#555; margin-top:8px;">Device Status: <span style="color:var(--success-color); font-weight:700;">Dojo Cloud Server Active✓</span></p>
+                        </div>
+                        
+                        <div class="namo-panel-card">
+                            <h3><i data-lucide="camera" style="width:16px; height:16px; color:var(--primary-color);"></i> Profile Customization</h3>
+                            <div class="form-group" style="margin-bottom:12px;">
+                                <label style="font-size:11.5px; font-weight:700;">Upload Profile Photo</label>
+                                <label class="upload-input-label-btn" style="width:100%; justify-content:center; margin-top:4px; padding:8px 12px; font-size:12px; display:inline-flex; border:1px solid #ccc; border-radius:6px; cursor:pointer;">
+                                    <i data-lucide="image" style="width:14px; height:14px;"></i> Choose Photo File
+                                    <input type="file" id="userProfileImageFile" accept="image/*" style="display: none;">
+                                </label>
+                            </div>
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label style="font-size:11px;">Bio / Rank Details</label>
+                                <input type="text" id="pCardCustomBio" style="padding:8px; font-size:12.5px; border-radius:6px;" value="Active student training at Zen Isshinryu Dojo branches.">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <button id="communityPostFAB" class="fab-hidden">
+            <i data-lucide="plus" style="width:18px; height:18px;"></i> Write a Feed Post
+        </button>
+
+        <footer class="app-bottom-navbar">
+            <button class="bottom-nav-tab active" id="nav-home" onclick="switchView('home')">
+                <i data-lucide="home"></i>
+                <span>Home</span>
+            </button>
+            <button class="bottom-nav-tab" id="nav-dojo" onclick="switchView('dojo')">
+                <i data-lucide="bell"></i>
+                <span>Announcements</span>
+            </button>
+            <button class="bottom-nav-tab" id="nav-feed" onclick="switchView('feed')">
+                <i data-lucide="rss"></i>
+                <span>Public Feed</span>
+            </button>
+            <button class="bottom-nav-tab" id="nav-profile" onclick="switchView('profile')">
+                <i data-lucide="user"></i>
+                <span>Profile</span>
+            </button>
+        </footer>
+
+    </div>
+
+    <div id="postModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 id="modalBoxHeader" style="font-size:16px;">Share directly to Dojo Feed</h3>
+            <div class="form-group" style="margin-top: 14px;">
+                <label>Post Heading</label>
+                <input type="text" id="postTitle" placeholder="What is this post about?">
+            </div>
+            <div class="form-group">
+                <label>Message Content</label>
+                <textarea id="postBody" rows="4" style="width:100%; font-family:inherit; padding:10px; border-radius:6px; border:1px solid #ccc;" placeholder="Share updates, advice, or training highlights..."></textarea>
+            </div>
+            
+            <div class="form-group" id="mediaAttachmentBlock">
+                <label>Attach Photo or Video</label>
+                <label class="upload-input-label-btn" style="display:inline-flex; border:1px solid #ccc; padding:8px 12px; border-radius:6px; cursor:pointer; gap:6px; font-size:12px; font-weight:700;">
+                    <i data-lucide="paperclip" style="width:14px; height:14px;"></i> Select Local File
+                    <input type="file" id="postMediaFile" accept="image/*,video/*" style="display: none;">
+                </label>
+                <div id="mediaPreviewStatus" class="media-preview-container view-hidden" style="margin-top:8px; font-size:12px; font-weight:700; color:var(--primary-color);"></div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="closeModalBtn" style="padding:10px 16px; font-size:13px;">Cancel</button>
+                <button class="btn btn-primary" id="submitPostBtn" style="padding:10px 16px; font-size:13px;">Publish Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+
+        // ==========================================================================
+        // FIREBASE LIVE CONNECTION PROFILE OBJECT SNIPPET CONFIG MAPS KEYS
+        // ==========================================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyB9sIBTl3shy2GQf2Z5G4w0CEeJFMopy9o",
+            authDomain: "shihan-webapp.firebaseapp.com",
+            projectId: "shihan-webapp",
+            storageBucket: "shihan-webapp.firebasestorage.app",
+            messagingSenderId: "195787385433",
+            appId: "1:195787385433:web:6cecd2c534f21ce81c9f48"
+        };
+
+        // Initialize Cloud Client Connections SDK instances
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Global shared view status variables descriptors
+        window.currentUserSession = null;
+        window.userCustomAvatarDataUrl = null;
+        window.currentView = 'home';
+        window.previousViewBeforeDetail = 'home';
+        window.currentAuthMode = 'login';
+        window.attachedMediaDataUrl = null;
+        window.attachedMediaType = null;
+        window.activeModalTarget = 'feed';
+
+        window.dojoAnnouncementsData = [
+            {
+                authorName: "Shihan Pradeep Babu M",
+                authorInitials: "PB",
+                roleClass: "shihan",
+                roleTitle: "Founder & Master",
+                title: "Official Dojo Network Portal Is Active",
+                body: "This column holds official structural notices, grading results, schedule announcements, and executive directives broadcasted directly from my desk. Students can read details here, but public interactions belong in the Public Feed tab.",
+                mediaUrl: null,
+                mediaType: null,
+                date: new Date(2026, 4, 25)
+            }
+        ];
+
+        window.publicFeedData = [
+            {
+                authorName: "Sensei Rajesh Kumar",
+                authorInitials: "RK",
+                roleClass: "member",
+                roleTitle: "Community Member",
+                title: "Morning Kata Session Highlights",
+                body: "Amazing intensity from our junior green belt squad today during close-quarters defensive drills. Keep up the high energy!",
+                mediaUrl: null,
+                mediaType: null,
+                date: new Date(2026, 4, 26)
+            }
+        ];
+
+        // 3. LISTEN TO BACKGROUND REAL-TIME SESSION RECOVERY CHAINS
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                let isAdminLogin = user.email.toLowerCase().includes('pradeep');
+                
+                if (isAdminLogin) {
+                    window.currentUserSession = {
+                        uid: user.uid,
+                        name: "Shihan Pradeep Babu M",
+                        email: "pradeepbabu@isshinryu.in",
+                        initials: "PB",
+                        roleClass: "shihan",
+                        roleTitle: "Founder & Master"
+                    };
+                } else {
+                    const docSnap = await getDoc(doc(db, "users", user.uid));
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data();
+                        window.currentUserSession = {
+                            uid: user.uid,
+                            name: userData.name,
+                            email: user.email,
+                            initials: getInitials(userData.name),
+                            roleClass: "member",
+                            roleTitle: "Community Member"
+                        };
+                    }
+                }
+
+                if (window.currentUserSession) {
+                    document.getElementById('pCardInitials').textContent = window.currentUserSession.initials;
+                    document.getElementById('pCardName').textContent = window.currentUserSession.name;
+                    document.getElementById('pCardRole').textContent = window.currentUserSession.roleTitle;
+                    document.getElementById('pCardEmail').textContent = window.currentUserSession.email;
+                    document.getElementById('topHeaderNameNode').textContent = window.currentUserSession.name;
+                    document.getElementById('topHeaderAvatarNode').textContent = window.currentUserSession.initials;
+                    unlockApplicationLayer();
+                }
+            }
+        });
+
+        // 4. CORE ACTION COMPONENT DISPATCH ROUTINGS PIPELINES
+        window.processAuthAction = async function() {
+            const email = document.getElementById('emailInput').value.trim();
+            const password = document.getElementById('passwordInput').value.trim();
+            const nameInput = document.getElementById('authNameInput').value.trim();
+
+            if (!email || !password) { alert('Please enter all parameters fields.'); return; }
+            if (!validateEmailFormat(email)) { alert('Invalid Email structure configuration.'); return; }
+
+            let isAdminLogin = email.toLowerCase().includes('pradeep') || password.toLowerCase() === 'shihan';
+
+            if (window.currentAuthMode === 'register') {
+                if (!nameInput) { alert('Full account identity profile name required.'); return; }
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    await setDoc(doc(db, "users", userCredential.user.uid), {
+                        name: nameInput,
+                        email: email,
+                        roleClass: "member",
+                        roleTitle: "Community Member"
+                    });
+                    
+                    window.currentUserSession = {
+                        uid: userCredential.user.uid,
+                        name: nameInput,
+                        email: email,
+                        initials: getInitials(nameInput),
+                        roleClass: "member",
+                        roleTitle: "Community Member"
+                    };
+                    
+                    alert("Account registered permanently inside your live Firebase Cloud!");
+                    unlockApplicationLayer(); 
+                } catch (err) {
+                    alert("Cloud Registration Error: " + err.message);
+                }
+            } 
+            else if (window.currentAuthMode === 'login') {
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    
+                    if (isAdminLogin) {
+                        window.currentUserSession = {
+                            uid: userCredential.user.uid,
+                            name: "Shihan Pradeep Babu M",
+                            email: "pradeepbabu@isshinryu.in",
+                            initials: "PB",
+                            roleClass: "shihan",
+                            roleTitle: "Founder & Master"
+                        };
+                        unlockApplicationLayer();
+                    } else {
+                        const docSnap = await getDoc(doc(db, "users", userCredential.user.uid));
+                        if (docSnap.exists()) {
+                            const userData = docSnap.data();
+                            window.currentUserSession = {
+                                uid: userCredential.user.uid,
+                                name: userData.name,
+                                email: email,
+                                initials: getInitials(userData.name),
+                                roleClass: "member",
+                                roleTitle: "Community Member"
+                            };
+                            unlockApplicationLayer(); 
+                        } else {
+                            alert("Profile missing from database. Please create a new account.");
+                        }
+                    }
+                } catch (err) {
+                    alert("Invalid Credentials: No registered record exists matching this email on this device workspace. Please use 'Create Account' first if you reinstalled the app.");
+                }
+            }
+        }
+
+        window.handleLogoutAction = function() {
+            signOut(auth).then(() => {
+                window.currentUserSession = null;
+                window.userCustomAvatarDataUrl = null;
+                document.getElementById('root-auth-guard').className = 'auth-guard-gate-overlay';
+                document.getElementById('main-application-shell').className = 'view-hidden';
+                document.getElementById('topHeaderAvatarNode').innerHTML = 'U';
+                document.getElementById('pCardInitials').innerHTML = 'U';
+                document.getElementById('emailInput').value = '';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('authNameInput').value = '';
+                setAuthMode('login');
+                handleFABVisibility();
+                alert('Session flushed from cloud safely.');
+            });
+        }
+
+        // Structural UI rendering event mappings links
+        document.getElementById('shihanPostBtn').addEventListener('click', () => openPostModal('dojo'));
+        document.getElementById('communityPostFAB').addEventListener('click', () => openPostModal('feed'));
+        document.getElementById('closeModalBtn').addEventListener('click', closePostModal);
+        document.getElementById('submitPostBtn').addEventListener('click', publishContentRecord);
+        document.getElementById('userProfileImageFile').addEventListener('change', processUserProfilePhotoUpload);
+        document.getElementById('postMediaFile').addEventListener('change', handleLocalFilePreview);
+
+        lucide.createIcons();
+    </script>
+
+    <script>
+        // PROFESSIONAL REGISTRY WITH CLEAN INLINE BULLET ICON PACKS
+        const achievementDetailsRegistry = {
+            karate: { icon: "shield", title: "Traditional Karate Mastery", subtitle: "Zen Isshinryu Karate Leadership", bullets: [ "Holds the advanced rank of 6th Dan Black Belt, reflecting decades of consistent, rigorous development.", "Serves as the Chief Instructor and Chief Examiner, setting technical profiles across regional training systems.", "Awarded the ultimate martial title of SHIHAN, designating an authoritative 'Master of the Masters'.", "Represented India internationally, winning the prestigious Silver Medal at the Isshinryu World Karate Championship in Pittsburgh, USA, 2024.", "Instructs an inclusive range of martial artists, mentoring active students between the ages of 2.5 and 86 years old." ], icons: ["award", "user-check", "shield-check", "globe", "users"] },
+            academics: { icon: "book-open", title: "Academic Background", subtitle: "Higher Education & Public Administration Studies", bullets: [ "Committed undergraduate program at Loyola College, Chennai, earning a Bachelor of Science (B.Sc.) degree in Mathematics.", "Currently pursuing an advanced Master of Arts (M.A.) degree in Public Administration from the University of Madras." ], icons: ["graduation-cap", "file-text"] },
+            taekwondo: { icon: "zap", title: "Kukkiwon Certified Taekwondo Mastery", subtitle: "2nd Degree Black Belt — Technical Specialization", bullets: [ "Holds a prestigious 2nd Degree Black Belt certified directly by Kukkiwon (World Taekwondo Headquarters, South Korea).", "Maintains expert mastery over competitive Olympic-style sparring methodologies, complex rulesets, and digital electronic scoring systems." ], icons: ["star", "activity"] },
+            scoutHistory: { icon: "compass", title: "Scout History & Honors", subtitle: "State & National Service Recognition", bullets: [ "Honored with the highly selective Rajyapuraskar (Governor) Award, presented by the Governor of Tamil Nadu, Dr. K. Rosaiah, in 2013.", "Selected to participate in the prestigious 65th Republic Day Ceremonial Parade, marching with the elite contingent while holding the National Flag." ], icons: ["ribbon", "flag"] },
+            others: { icon: "award", title: "Athletics & Community Leadership", subtitle: "Track Championships & Non-Profit Movements", bullets: [ "Achieved peak athletic fitness, winning the Individual Championship title in Track and Field events consecutively for 3 years.", "Acts as a core Founding Member of 'Ezhuvaai Ondraga' (Rise Together), a dedicated social movement providing resources for underprivileged children." ], icons: ["trending-up", "heart"] },
+            medal: { icon: "trophy", title: "Silver Medal Glory", subtitle: "Isshinryu World Karate Championship, Pittsburgh USA, 2024", bullets: [ "Selected to join the official Indian national contingent to face off against elite fighters from across the globe.", "Tested tactical skills, close-range defense formulas, and high-intensity sparring strategies against top global champions." ], icons: ["globe", "crosshair"] },
+            record: { icon: "medal", title: "World Record Breaking Performance", subtitle: "1,222 Heavy Motorcycles Over Chest in 37 Mins 16 Secs (April 2021)", bullets: [ "An exceptional exhibition of peak physical conditioning, dynamic breathing muscle lock, and pure mental toughness.", "Broke his own martial arts master's standing 12-year-old historic legacy record." ], icons: ["zap", "clock"] },
+            dan: { icon: "shield-check", title: "The Rank of Shihan", subtitle: "6th Degree Expert & Senior Organizational Examiner", bullets: [ "Acts as the paramount examiner for black belt promotional testing loops across India.", "Preserves traditional structural geometry for classical forms (Kata) and tactical defensive systems." ], icons: ["user-check", "bookmark"] },
+            students: { icon: "users", title: "Lineage & Instruction Milestones", subtitle: "1,700+ Global Martial Artists Mentored Since 2011", bullets: [ "Successfully developed over 150 certified Black Belts who now act as guardians of the style.", "Mentored 15 passionate senior trainers to launch branch dojos and preserve uniform teaching methods." ], icons: ["smile", "trending-up"] },
+            scout: { icon: "graduation-cap", title: "The Rashtrapati Scout Award", subtitle: "Highest Scouting Distinction in India (Presented in 2015)", bullets: [ "Formally awarded the supreme scouting honor at the Rashtrapati Bhavan by the President of India.", "Earned through long-term field tests in survival tracking, advanced community relief operations, and civic management." ], icons: ["home", "shield"] },
+            defence: { icon: "heart", title: "Women's Tactical Self-Defense", subtitle: "Empowerment & Crime Mitigation Across Modern Hubs", bullets: [ "Deploys simplified, high-impact defense workshops tailored specifically for immediate threat reduction.", "Conducted prominent campus-wide initiatives for SRM College, Saveetha School of Law, and corporate complexes like Infosys." ], icons: ["unlock", "building"] }
+        };
+
+        function navigateToDetail(key) {
+            const data = achievementDetailsRegistry[key];
+            if(!data) return;
+            window.previousViewBeforeDetail = window.currentView;
+            const contentNode = document.getElementById('detail-view-content');
+            
+            // PROFESSIONAL ICON INLINE POPULATION IN SUB-PAGES
+            let bulletsHTML = '<ul class="detail-body-list">';
+            data.bullets.forEach((bullet, index) => { 
+                let bulletIcon = (data.icons && data.icons[index]) ? data.icons[index] : "check";
+                bulletsHTML += `<li><i data-lucide="${bulletIcon}" style="width:14px; height:14px; margin-top:4px;"></i> <span>${escapeHtml(bullet)}</span></li>`; 
+            });
+            bulletsHTML += '</ul>';
+
+            contentNode.innerHTML = `
+                <div class="detail-header"><i data-lucide="${data.icon || 'calendar'}" style="width: 32px; height: 32px;"></i><div><h2>${data.title}</h2></div></div>
+                <div class="detail-highlight">${data.subtitle}</div>${bulletsHTML}`;
+            lucide.createIcons();
+            switchView('detail');
+        }
+
+        function returnFromDetailView() { switchView(window.previousViewBeforeDetail); }
+
+        function switchView(viewName) {
+            document.getElementById('home-view').className = 'view-hidden';
+            document.getElementById('dojo-view').className = 'view-hidden';
+            document.getElementById('feed-view').className = 'view-hidden';
+            document.getElementById('profile-view').className = 'view-hidden';
+            document.getElementById('detail-view').className = 'view-hidden';
+            
+            const targetedNode = document.getElementById(`${viewName}-view`);
+            if(targetedNode) targetedNode.className = 'view-active';
+            
+            const navButtons = document.querySelectorAll('.app-bottom-navbar .bottom-nav-tab');
+            navButtons.forEach(btn => {
+                if(btn.id === `nav-${viewName}`) { btn.classList.add('active'); } else { btn.classList.remove('active'); }
+            });
+            window.currentView = viewName;
+            handleFABVisibility();
+            if(viewName === 'dojo') { renderDojoAnnouncementsFeed(); }
+            if(viewName === 'feed') { renderPublicUpdatesFeed(); }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function processUserProfilePhotoUpload(event) {
+            const file = event.target.files[0];
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                window.userCustomAvatarDataUrl = e.target.result;
+                document.getElementById('pCardInitials').innerHTML = `<img src="${window.userCustomAvatarDataUrl}" alt="Avatar">`;
+                document.getElementById('topHeaderAvatarNode').innerHTML = `<img src="${window.userCustomAvatarDataUrl}" alt="Avatar">`;
+                if(window.currentView === 'feed') { renderPublicUpdatesFeed(); }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleLocalFilePreview(event) {
+            const file = event.target.files[0];
+            const statusNode = document.getElementById('mediaPreviewStatus');
+            if(!file) return;
+            window.attachedMediaType = file.type.startsWith('image/') ? 'image' : file.type.startsWith('video/') ? 'video' : null;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                window.attachedMediaDataUrl = e.target.result;
+                statusNode.className = 'media-preview-container';
+                statusNode.innerHTML = `<i data-lucide="check-circle-2" style="color:var(--success-color); width:14px; height:14px;"></i> ${file.name} ready!`;
+                lucide.createIcons();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function setAuthMode(mode) {
+            const loginTab = document.getElementById('tab-login');
+            const registerTab = document.getElementById('tab-register');
+            const nameGroup = document.getElementById('nameGroup');
+            const submitBtn = document.getElementById('authSubmitBtn');
+            window.currentAuthMode = mode;
+            if(mode === 'register') {
+                loginTab.classList.remove('active'); registerTab.classList.add('active');
+                nameGroup.classList.remove('view-hidden'); submitBtn.textContent = 'Create Account';
+            } else {
+                loginTab.classList.add('active'); registerTab.classList.remove('active');
+                nameGroup.className = 'form-group id-field-block view-hidden'; submitBtn.textContent = 'Sign In';
+            }
+        }
+
+        function validateEmailFormat(email) {
+            return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+        }
+
+        function unlockApplicationLayer() {
+            document.getElementById('root-auth-guard').className = 'view-hidden';
+            document.getElementById('main-application-shell').className = 'view-active';
+            const feedSubtitle = document.getElementById('feedSubtitle');
+            const shihanNoticeBtn = document.getElementById('shihanPostBtn');
+            feedSubtitle.textContent = `Welcome ${window.currentUserSession.name} (${window.currentUserSession.roleTitle}). You can publish posts to this timeline.`;
+            if(window.currentUserSession.roleClass === 'shihan') {
+                shihanNoticeBtn.className = 'btn btn-primary';
+                document.getElementById('topHeaderAvatarNode').style.background = 'linear-gradient(135deg, #E74C3C, #D35400)';
+            } else {
+                shihanNoticeBtn.className = 'btn btn-primary view-hidden';
+                document.getElementById('topHeaderAvatarNode').style.background = 'linear-gradient(135deg, #2C3E50, #34495E)';
+            }
+            switchView('home'); 
+        }
+
+        function handleFABVisibility() {
+            const fabElement = document.getElementById('communityPostFAB');
+            if (window.currentView === 'feed' && window.currentUserSession !== null) { fabElement.className = ''; } else { fabElement.className = 'fab-hidden'; }
+        }
+
+        function openPostModal(targetEngine) { 
+            window.activeModalTarget = targetEngine;
+            if(targetEngine === 'dojo' && window.currentUserSession.roleClass !== 'shihan') { alert("Access denied."); return; }
+            const mediaBlock = document.getElementById('mediaAttachmentBlock');
+            const headerLabel = document.getElementById('modalBoxHeader');
+            if(targetEngine === 'dojo') {
+                headerLabel.textContent = "Publish Official Dojo Announcement"; mediaBlock.className = 'form-group view-hidden';
+            } else {
+                headerLabel.textContent = "Post directly to Public Feed Section"; mediaBlock.className = 'form-group';
+            }
+            document.getElementById('postModal').classList.add('active'); 
+        }
+        
+        function closePostModal() {
+            document.getElementById('postModal').classList.remove('active');
+            document.getElementById('postTitle').value = ''; document.getElementById('postBody').value = '';
+            document.getElementById('mediaPreviewStatus').className = 'media-preview-container view-hidden';
+            window.attachedMediaDataUrl = null; window.attachedMediaType = null;
+        }
+
+        function publishContentRecord() {
+            const title = document.getElementById('postTitle').value.trim();
+            const body = document.getElementById('postBody').value.trim();
+            if (!title || !body) { alert('Please fill metrics entries fields.'); return; }
+            const newPacket = {
+                authorName: window.currentUserSession.name, authorInitials: window.currentUserSession.initials,
+                roleClass: window.currentUserSession.roleClass, roleTitle: window.currentUserSession.roleTitle,
+                authorCustomAvatar: (window.currentUserSession.roleClass !== 'shihan') ? window.userCustomAvatarDataUrl : null, 
+                title: title, body: body, mediaUrl: window.attachedMediaDataUrl, mediaType: window.attachedMediaType, date: new Date()
+            };
+            if(window.activeModalTarget === 'dojo') { window.dojoAnnouncementsData.unshift(newPacket); renderDojoAnnouncementsFeed(); } else { window.publicFeedData.unshift(newPacket); renderPublicUpdatesFeed(); }
+            closePostModal();
+        }
+
+        function renderDojoAnnouncementsFeed() {
+            const node = document.getElementById('dojo-feed-list');
+            if(window.dojoAnnouncementsData.length === 0) { node.innerHTML = `<p class="empty-text">No announcements.</p>`; return; }
+            node.innerHTML = '';
+            window.dojoAnnouncementsData.forEach(item => {
+                const dateStr = `${item.date.getDate()}/${item.date.getMonth() + 1}/${item.date.getFullYear()}`;
+                node.innerHTML += `
+                    <div class="update-card" style="border-left: 4px solid var(--primary-color);">
+                        <div class="update-header"><div class="user-meta"><div class="user-avatar" style="background-color:#D35400;">${item.authorInitials}</div><div class="post-info"><h4>${escapeHtml(item.authorName)}</h4><span>${dateStr}</span></div></div><span class="post-badge shihan">${escapeHtml(item.roleTitle)}</span></div>
+                        <div class="update-title-text" style="color: var(--primary-color);">${escapeHtml(item.title)}</div><p class="update-body">${escapeHtml(item.body).replace(/\n/g, '<br>')}</p>
+                    </div>`;
+            });
+        }
+
+        function renderPublicUpdatesFeed() {
+            const feedContainer = document.getElementById('public-feed-list');
+            if (window.publicFeedData.length === 0) { feedContainer.innerHTML = `<p class="empty-text">No posts.</p>`; return; }
+            feedContainer.innerHTML = ''; 
+            window.publicFeedData.forEach(item => {
+                const dateString = `${item.date.getDate()}/${item.date.getMonth() + 1}/${item.date.getFullYear()}`;
+                let mediaMarkup = '';
+                if (item.mediaUrl) { if (item.mediaType === 'image') { mediaMarkup = `<div class="post-media-wrapper"><img src="${item.mediaUrl}"></div>`; } else if (item.mediaType === 'video') { mediaMarkup = `<div class="post-media-wrapper"><video src="${item.mediaUrl}" controls></video></div>`; } }
+                let avatarNodeMarkup = `<div class="user-avatar" style="background-color:#2C3E50;">${item.authorInitials}</div>`;
+                if (item.roleClass === 'shihan') { avatarNodeMarkup = `<div class="user-avatar" style="background-color:#D35400;">${item.authorInitials}</div>`; } else if (item.authorCustomAvatar) { avatarNodeMarkup = `<div class="user-avatar"><img src="${item.authorCustomAvatar}"></div>`; } else if (window.currentUserSession && item.authorName === window.currentUserSession.name && window.userCustomAvatarDataUrl) { avatarNodeMarkup = `<div class="user-avatar"><img src="${window.userCustomAvatarDataUrl}"></div>`; }
+                feedContainer.innerHTML += `
+                    <div class="update-card">
+                        <div class="update-header"><div class="user-meta">${avatarNodeMarkup}<div class="post-info"><h4>${escapeHtml(item.authorName)}</h4><span>${dateString}</span></div></div><span class="post-badge ${item.roleClass}">${escapeHtml(item.roleTitle)}</span></div>
+                        <div class="update-title-text">${escapeHtml(item.title)}</div><p class="update-body">${escapeHtml(item.body).replace(/\n/g, '<br>')}</p>${mediaMarkup}
+                    </div>`;
+            });
+        }
+
+        function escapeHtml(text) { return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); }
+    </script>
+</body>
+</html>
